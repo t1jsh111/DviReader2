@@ -1,0 +1,16 @@
+#ifndef DVIPAGE_H
+#define DVIPAGE_H
+
+#include <QImage>
+class DviPage
+{
+public:
+    DviPage(int pageNumber);
+private:
+    int pageNumber;
+    
+    int scalarOfCachedImage = 0;
+    QImage cachedImage;
+};
+
+#endif // DVIPAGE_H

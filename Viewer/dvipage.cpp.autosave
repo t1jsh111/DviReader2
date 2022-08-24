@@ -1,0 +1,77 @@
+#include "dvipage.h"
+
+DviPage::DviPage()
+{
+
+}
+
+
+QImage DviPage::getImage(double scalar)
+{
+
+    //For now we assume A4 Size
+    //TODO support multiple file formats
+    //Now default TeX width and height, but via special it can actually be different....
+    double documentWidth = 8.5 * ResolutionManager::pixelsPerInchX;
+    double documentHeight = 10.9 * ResolutionManager::pixelsPerInchY;
+
+
+    QImage documentImage(documentWidth * scalar, documentHeight * scalar, QImage::Format_RGB32);
+    documentImage.fill(Qt::white);
+    QPainter painter(&documentImage);
+    //painter.setTransform(imageCoordinateTransformation(scalar));
+
+    painter.setPen(Qt::black);
+    //painter.setRenderHint(QPainter::TextAntialiasing, true);
+    //painter.setRenderHint(QPainter::Antialiasing, true);
+
+    FontManager& fontManager = FontManager::getInstance();
+
+    DVIPage page = document.dviPages.at(pageNumber);
+
+    for(auto character : page.getCharacters()) {
+//        qreal x = ResolutionManager::spToPx(character.h);
+//        qreal y = ResolutionManager::spToPx(character.v);
+
+        qreal x = character.h;
+        qreal y = character.v;
+
+
+
+        qreal pointSize = ResolutionManager::spToPt(character.font->scaleFactor) * scalar;
+        QString fontName = QString::fromStdString(character.font->fontName);
+        QRawFont& font = fontManager.getRawFont(fontName, pointSize);
+        QGlyphRun letterRun;
+        letterRun.setRawFont(font);
+
+        QPointF point = imageCoordinateTransformation(scalar).map(QPointF(x,y));
+
+        letterRun.setGlyphIndexes({(quint32) character.getGlyphNumber()});
+        letterRun.setPositions({point});
+
+        //We add an ofset of one inch: i.e. 72 point in order for the margins to be appropriate....
+        painter.drawGlyphRun(QPoint(0,0), letterRun);
+
+    }
+
+
+        painter.setBrush(Qt::black);
+        for(auto rectangle : page.getRectangles()) {
+            qreal x = rectangle.h;
+            qreal y = rectangle.v;
+
+            qreal width = rectangle.width;
+            qreal height = rectangle.height;
+
+            QPointF transformedPoint = imageCoordinateTransformation(scalar).map(QPointF(x,y-height));
+
+            qDebug() << "rectangle" << transformedPoint << " width " << width << " height " << height;
+
+            width = ResolutionManager::spToPx(rectangle.width) * scalar;
+            height = ResolutionManager::spToPx(rectangle.height) * scalar;
+
+            painter.drawRect(transformedPoint.x(), transformedPoint.y(), width, height);
+        }
+    return documentImage;
+
+}
