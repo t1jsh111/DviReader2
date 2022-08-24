@@ -7,8 +7,9 @@ TeX is one of the oldest programs that is still in use as of today.
 While, most users are familiar with the term LaTeX, this is in fact only a set of macros on top of TeX.
 In the background, still the TeX engine is doing all the necessary computations, and generating the output file.
 As of today, there are compilers such as PDFTex that can not only produce DVI files, but also PDF files directly from a TeX source.
-These DVI files contain binary data that can be translated to graphical data. One could for example translate DVI files to PDF.
 
+
+DVI files contain binary data that can be translated to graphical data. One could for example translate DVI files to PDF.
 While PDFs have been standardized, the DVI files are still a format of interest.
 The DVI files are more simplistic then PDFs are. For example, the DVI files do not embed the fonts that are used (but require them to be available on the machine).
 This makes the production of DVI files more efficient, allowing for faster view of output file.
