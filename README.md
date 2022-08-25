@@ -32,7 +32,9 @@ In this (ongoing) project, an attempt is made to build an open-source DVI File v
 - DviInterpreter: Fully functional, but font metrics currently from converted TexFonts to TTF fonts, that are read with FreeType. It is probably desirable to switch to tex font metrics to be more precise, while it seemed to have result in imprecision.
 - DviViewer: POC functional. 
 
-<img src="https://github.com/t1jsh111/DviReader2/raw/main/screenshot_dviPreviewer.png" alt="screenshot" width="3f00"/>
+
+![](https://github.com/t1jsh111/DviReader2/raw/main/screenshot_dviPreviewer.png | width=100)
+<img src="https://github.com/t1jsh111/DviReader2/raw/main/screenshot_dviPreviewer.png" alt="screenshot" width="300"/>
 
 
 On the left one can see the dvi file in the BaKoMa DVI previewer, and on the right the same file is visualized using DviReader 2. It is expected the small misallignment occurs because of the difference in fonts used.
