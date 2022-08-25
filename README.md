@@ -1,6 +1,8 @@
-# DVI Interprter
+# DviReader2
 
-Dvi Interpreter is a C++ library to process DeVice Indepenent (DVI) files.
+The software consists out of the DviInterpreter and DviViewer
+
+DviInterpreter is a C++ library to process DeVice Indepenent (DVI) files.
 The DVI files are the native output for the TeX compiler, written by the famous computer Scientist Donald E. Knuth.
 
 TeX is one of the oldest programs that is still in use as of today.
@@ -29,6 +31,14 @@ In this (ongoing) project, an attempt is made to build an open-source DVI File v
 
 - DviInterpreter: Fully functional, but font metrics currently from converted TexFonts to TTF fonts, that are read with FreeType. It is probably desirable to switch to tex font metrics to be more precise, while it seemed to have result in imprecision.
 - DviViewer: POC functional. 
+
+<img src="https://github.com/t1jsh111/DviReader2/blob/main/screenshot_dviPreviewer.png" alt="screenshot" width="3f00"/>
+
+
+On the left one can see the dvi file in the BaKoMa DVI previewer, and on the right the same file is visualized using DviReader 2. It is expected the small misallignment occurs because of the difference in fonts used.
+
+The project is still in progress.
+
 
 
 
